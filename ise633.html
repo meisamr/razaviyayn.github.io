@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISE 633: Large-Scale Optimization for Machine Learning | Meisam Razaviyayn</title>
+    <meta name="description" content="ISE 633 - Large-Scale Optimization for Machine Learning, taught by Meisam Razaviyayn at USC.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        .course-hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #2d5a8e 100%);
+            color: #fff;
+            padding: 80px 0 60px;
+        }
+        .course-hero h1 {
+            font-family: var(--font-serif);
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+        .course-hero .course-number {
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            opacity: 0.75;
+            margin-bottom: 16px;
+        }
+        .course-hero .course-tagline {
+            font-size: 1.05rem;
+            opacity: 0.9;
+            max-width: 640px;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 28px;
+            transition: color 0.2s;
+        }
+        .back-link:hover { color: #fff; }
+        .course-body {
+            padding: 60px 0 80px;
+        }
+        .course-layout {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 48px;
+            align-items: start;
+        }
+        .course-section {
+            margin-bottom: 44px;
+        }
+        .course-section h2 {
+            font-family: var(--font-serif);
+            font-size: 1.35rem;
+            color: var(--primary);
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--accent);
+        }
+        .course-section p {
+            color: var(--text-body);
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+        .course-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .course-section ul li {
+            padding: 6px 0 6px 20px;
+            position: relative;
+            color: var(--text-body);
+            line-height: 1.6;
+        }
+        .course-section ul li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 14px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+        .course-section ul.sub-list {
+            padding-left: 20px;
+            margin-top: 4px;
+        }
+        .course-section ul.sub-list li {
+            font-size: 0.93rem;
+            padding: 3px 0 3px 16px;
+            color: var(--text-light);
+        }
+        .course-section ul.sub-list li::before {
+            width: 4px;
+            height: 4px;
+            top: 12px;
+            background: var(--text-light);
+        }
+        .topic-item {
+            margin-bottom: 12px;
+        }
+        .topic-item > li {
+            font-weight: 500;
+            color: var(--text-body);
+        }
+        /* Sidebar */
+        .course-sidebar {
+            position: sticky;
+            top: 100px;
+        }
+        .info-card {
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 20px;
+        }
+        .info-card h3 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+        .info-row {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .info-label {
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-light);
+        }
+        .info-value {
+            font-size: 0.93rem;
+            color: var(--text-body);
+        }
+        .info-value a {
+            color: var(--primary);
+        }
+        .grading-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .grading-table tr {
+            border-bottom: 1px solid var(--border);
+        }
+        .grading-table tr:last-child {
+            border-bottom: none;
+        }
+        .grading-table td {
+            padding: 8px 4px;
+            font-size: 0.92rem;
+            color: var(--text-body);
+        }
+        .grading-table td:last-child {
+            text-align: right;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        .syllabus-btn {
+            display: block;
+            text-align: center;
+            background: var(--accent);
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background 0.2s, transform 0.1s;
+        }
+        .syllabus-btn:hover {
+            background: #7a1b28;
+            transform: translateY(-1px);
+        }
+        @media (max-width: 900px) {
+            .course-layout {
+                grid-template-columns: 1fr;
+            }
+            .course-sidebar {
+                position: static;
+            }
+        }
+        @media (max-width: 600px) {
+            .course-hero h1 { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">Meisam Razaviyayn</a>
+            <ul class="nav-links">
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#publications">Publications</a></li>
+                <li><a href="index.html#teaching">Teaching</a></li>
+                <li><a href="index.html#group">Group</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Course Hero -->
+    <div class="course-hero">
+        <div class="container">
+            <a href="index.html#teaching" class="back-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                Back to Teaching
+            </a>
+            <div class="course-number">ISE 633 &middot; 4 Units</div>
+            <h1>Large-Scale Optimization for Machine Learning</h1>
+            <p class="course-tagline">Theory and tools for large-scale optimization arising in modern data science and machine learning applications.</p>
+        </div>
+    </div>
+
+    <!-- Course Body -->
+    <div class="course-body">
+        <div class="container">
+            <div class="course-layout">
+
+                <!-- Main Content -->
+                <div class="course-main">
+
+                    <div class="course-section">
+                        <h2>Course Description</h2>
+                        <p>The course covers the theory and tools for large-scale optimization that arise in modern data science and machine learning applications. Topics include stochastic optimization, accelerated methods, parallelization, nonsmooth optimization, online optimization, variance reduction, differential privacy in optimization, and min-max games.</p>
+                    </div>
+
+                    <div class="course-section">
+                        <h2>Topics Covered</h2>
+                        <ul>
+                            <li class="topic-item">
+                                <strong>Background &amp; Preliminaries</strong>
+                                <ul class="sub-list">
+                                    <li>Optimization overview and examples in machine learning</li>
+                                    <li>Linear algebra and probability basics</li>
+                                </ul>
+                            </li>
+                            <li class="topic-item">
+                                <strong>Unconstrained Optimization</strong>
+                                <ul class="sub-list">
+                                    <li>Optimality conditions; convex vs. non-convex problems</li>
+                                    <li>First-order methods and convergence analysis</li>
+                                    <li>Momentum and accelerated methods</li>
+                                </ul>
+                            </li>
+                            <li class="topic-item">
+                                <strong>Constrained Optimization</strong>
+                                <ul class="sub-list">
+                                    <li>Fairness and safety in ML</li>
+                                    <li>KKT conditions and Lagrange multipliers</li>
+                                    <li>Projection-based algorithms</li>
+                                </ul>
+                            </li>
+                            <li class="topic-item">
+                                <strong>Nonsmooth Optimization</strong>
+                                <ul class="sub-list">
+                                    <li>Lasso, nuclear norm regularizers, nonsmooth activations</li>
+                                    <li>Block coordinate descent, ADMM, proximal gradient</li>
+                                </ul>
+                            </li>
+                            <li class="topic-item">
+                                <strong>Empirical Risk Minimization &amp; Stochastic Optimization</strong>
+                                <ul class="sub-list">
+                                    <li>SGD, stochastic variance reduced gradient descent</li>
+                                    <li>Parallel optimization: synchronous vs. asynchronous</li>
+                                </ul>
+                            </li>
+                            <li class="topic-item">
+                                <strong>Online Convex Optimization</strong>
+                                <ul class="sub-list">
+                                    <li>Regret analysis; follow-the-leader and variants</li>
+                                </ul>
+                            </li>
+                            <li class="topic-item">
+                                <strong>Learning via Min-Max Optimization</strong>
+                                <ul class="sub-list">
+                                    <li>GANs, adversarial learning, fair learning</li>
+                                    <li>Gradient descent-ascent and proximal-type methods</li>
+                                </ul>
+                            </li>
+                            <li class="topic-item">
+                                <strong>Second-Order Methods</strong>
+                                <ul class="sub-list">
+                                    <li>Hessian-vector products, conjugate gradient methods</li>
+                                </ul>
+                            </li>
+                            <li class="topic-item">
+                                <strong>Differential Privacy &amp; Optimization</strong>
+                                <ul class="sub-list">
+                                    <li>Privacy definitions; lower and upper bounds on differentially private convex optimization</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="course-section">
+                        <h2>Textbooks</h2>
+                        <p>There is no required textbook. The following are recommended references:</p>
+                        <ul>
+                            <li>S. Boyd and L. Vandenberghe, <em>Convex Optimization</em>, Cambridge University Press, 2004. (<a href="http://web.stanford.edu/~boyd/cvxbook" target="_blank" rel="noopener">Free online</a>)</li>
+                            <li>S. Shalev-Shwartz and S. Ben-David, <em>Understanding Machine Learning: From Theory to Algorithms</em>, Cambridge University Press, 2014. (<a href="http://www.cs.huji.ac.il/~shais/UnderstandingMachineLearning/" target="_blank" rel="noopener">Free online</a>)</li>
+                            <li>A. Shapiro, D. Darinka, and A. Ruszczynski, <em>Lectures on Stochastic Programming</em>, SIAM, 2009. (<a href="http://www2.isye.gatech.edu/~ashapiro/publications.html" target="_blank" rel="noopener">Free online</a>)</li>
+                            <li>C. Dwork and A. Roth, <em>The Algorithmic Foundations of Differential Privacy</em>, 2014. (<a href="https://www.cis.upenn.edu/~aaroth/Papers/privacybook.pdf" target="_blank" rel="noopener">Free online</a>)</li>
+                        </ul>
+                    </div>
+
+                    <div class="course-section">
+                        <h2>Assignments &amp; Policies</h2>
+                        <ul>
+                            <li>5&ndash;6 homework assignments submitted via Blackboard (PDF only); two lowest scores dropped.</li>
+                            <li>Each student must scribe lecture notes for one lecture (deadline: one week after the lecture).</li>
+                            <li>Late submissions are not accepted under any circumstances.</li>
+                            <li>Discussion with peers is encouraged; each student must submit their own work.</li>
+                            <li>Questions should be posted to the course Slack channel; grade-related queries should be emailed to the TA.</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <!-- Sidebar -->
+                <aside class="course-sidebar">
+
+                    <div class="info-card">
+                        <h3>Course Info</h3>
+                        <div class="info-row">
+                            <div class="info-item">
+                                <span class="info-label">Units</span>
+                                <span class="info-value">4</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Location</span>
+                                <span class="info-value">KAP 148</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Time</span>
+                                <span class="info-value">Tuesday / Thursday, 4:00&ndash;5:50 PM</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Instructor</h3>
+                        <div class="info-row">
+                            <div class="info-item">
+                                <span class="info-label">Name</span>
+                                <span class="info-value"><a href="index.html">Meisam Razaviyayn</a></span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Email</span>
+                                <span class="info-value"><a href="mailto:razaviya@usc.edu">razaviya@usc.edu</a></span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Office Hours</span>
+                                <span class="info-value">Thursdays 10&ndash;11 AM</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Teaching Assistant</h3>
+                        <div class="info-row">
+                            <div class="info-item">
+                                <span class="info-label">Name</span>
+                                <span class="info-value">Tianjian Huang</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Email</span>
+                                <span class="info-value"><a href="mailto:tianjian@usc.edu">tianjian@usc.edu</a></span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Office Hours</span>
+                                <span class="info-value">Wednesdays 3&ndash;4 PM</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Grading</h3>
+                        <table class="grading-table">
+                            <tr><td>Midterm Exam</td><td>30%</td></tr>
+                            <tr><td>Final Exam</td><td>35%</td></tr>
+                            <tr><td>Homework</td><td>20%</td></tr>
+                            <tr><td>Scribing</td><td>10%</td></tr>
+                            <tr><td>Participation</td><td>5%</td></tr>
+                        </table>
+                    </div>
+
+
+                </aside>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div class="footer-info">
+                <h3>Meisam Razaviyayn</h3>
+                <p>Associate Professor<br>University of Southern California</p>
+                <p class="footer-email"><a href="mailto:razaviya@usc.edu">razaviya@usc.edu</a></p>
+            </div>
+            <div class="footer-links">
+                <h4>Links</h4>
+                <ul>
+                    <li><a href="https://scholar.google.com/citations?user=-qhGYywAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a></li>
+                    <li><a href="https://sites.usc.edu/razaviyayn/files/2024/12/CV-6.pdf" target="_blank" rel="noopener">Curriculum Vitae</a></li>
+                    <li><a href="index.html#teaching">All Courses</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Affiliations</h4>
+                <ul>
+                    <li><a href="https://viterbi.usc.edu/" target="_blank" rel="noopener">USC Viterbi School of Engineering</a></li>
+                    <li><a href="https://ise.usc.edu/" target="_blank" rel="noopener">Daniel J. Epstein Dept. of ISE</a></li>
+                    <li><a href="https://realai.usc.edu/" target="_blank" rel="noopener">REAL@USC</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2025 Meisam Razaviyayn. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

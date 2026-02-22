@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISE 220: Probability Concepts in Engineering | Meisam Razaviyayn</title>
+    <meta name="description" content="ISE 220 - Probability Concepts in Engineering, taught by Meisam Razaviyayn at USC.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        .course-hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #2d5a8e 100%);
+            color: #fff;
+            padding: 80px 0 60px;
+        }
+        .course-hero h1 {
+            font-family: var(--font-serif);
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+        .course-hero .course-number {
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            opacity: 0.75;
+            margin-bottom: 16px;
+        }
+        .course-hero .course-tagline {
+            font-size: 1.05rem;
+            opacity: 0.9;
+            max-width: 640px;
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 28px;
+            transition: color 0.2s;
+        }
+        .back-link:hover { color: #fff; }
+        .course-body {
+            padding: 60px 0 80px;
+        }
+        .course-layout {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 48px;
+            align-items: start;
+        }
+        .course-section {
+            margin-bottom: 44px;
+        }
+        .course-section h2 {
+            font-family: var(--font-serif);
+            font-size: 1.35rem;
+            color: var(--primary);
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--accent);
+        }
+        .course-section p {
+            color: var(--text-body);
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+        .course-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .course-section ul li {
+            padding: 6px 0 6px 20px;
+            position: relative;
+            color: var(--text-body);
+            line-height: 1.6;
+        }
+        .course-section ul li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 14px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent);
+        }
+        /* Schedule table */
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.92rem;
+        }
+        .schedule-table th {
+            background: var(--primary);
+            color: #fff;
+            padding: 10px 14px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.82rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+        .schedule-table td {
+            padding: 10px 14px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-body);
+            vertical-align: top;
+        }
+        .schedule-table tr:last-child td {
+            border-bottom: none;
+        }
+        .schedule-table tr:nth-child(even) td {
+            background: var(--bg-light);
+        }
+        .schedule-table .midterm-row td {
+            font-weight: 600;
+            color: var(--accent);
+        }
+        /* Sidebar */
+        .course-sidebar {
+            position: sticky;
+            top: 100px;
+        }
+        .info-card {
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 28px;
+            margin-bottom: 20px;
+        }
+        .info-card h3 {
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+        .info-row {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .info-label {
+            font-size: 0.78rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-light);
+        }
+        .info-value {
+            font-size: 0.93rem;
+            color: var(--text-body);
+        }
+        .info-value a {
+            color: var(--primary);
+        }
+        .grading-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .grading-table tr {
+            border-bottom: 1px solid var(--border);
+        }
+        .grading-table tr:last-child {
+            border-bottom: none;
+        }
+        .grading-table td {
+            padding: 8px 4px;
+            font-size: 0.92rem;
+            color: var(--text-body);
+        }
+        .grading-table td:last-child {
+            text-align: right;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        .syllabus-btn {
+            display: block;
+            text-align: center;
+            background: var(--accent);
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: background 0.2s, transform 0.1s;
+        }
+        .syllabus-btn:hover {
+            background: #7a1b28;
+            transform: translateY(-1px);
+        }
+        @media (max-width: 900px) {
+            .course-layout {
+                grid-template-columns: 1fr;
+            }
+            .course-sidebar {
+                position: static;
+            }
+            .schedule-table { font-size: 0.85rem; }
+        }
+        @media (max-width: 600px) {
+            .course-hero h1 { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">Meisam Razaviyayn</a>
+            <ul class="nav-links">
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#publications">Publications</a></li>
+                <li><a href="index.html#teaching">Teaching</a></li>
+                <li><a href="index.html#group">Group</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Course Hero -->
+    <div class="course-hero">
+        <div class="container">
+            <a href="index.html#teaching" class="back-link">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+                Back to Teaching
+            </a>
+            <div class="course-number">ISE 220 &middot; 3 Units</div>
+            <h1>Probability Concepts in Engineering</h1>
+            <p class="course-tagline">Fundamental concepts of probability and reasoning under probabilistic models, with engineering applications.</p>
+        </div>
+    </div>
+
+    <!-- Course Body -->
+    <div class="course-body">
+        <div class="container">
+            <div class="course-layout">
+
+                <!-- Main Content -->
+                <div class="course-main">
+
+                    <div class="course-section">
+                        <h2>Course Description</h2>
+                        <p>The objective of the course is to introduce fundamental concepts of probability and reasoning under probabilistic models. Topics span the core curriculum of probability theory, from counting principles and basic axioms through random variables, expectation, and limit theorems.</p>
+                    </div>
+
+                    <div class="course-section">
+                        <h2>Weekly Schedule</h2>
+                        <table class="schedule-table">
+                            <thead>
+                                <tr>
+                                    <th>Week</th>
+                                    <th>Topic</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Week 1</td><td>Probability, Counting Principles</td></tr>
+                                <tr><td>Week 2</td><td>Sample Space, Events, Axioms of Probability</td></tr>
+                                <tr><td>Week 3</td><td>Equally Likely Outcomes</td></tr>
+                                <tr><td>Week 4</td><td>Conditional Probability, Independent Events, Bayes&rsquo; Formula</td></tr>
+                                <tr><td>Week 5</td><td>Random Variables, Probability Mass Function</td></tr>
+                                <tr><td>Week 6</td><td>Expected Value and Variance &mdash; <strong>First Midterm</strong></td></tr>
+                                <tr><td>Week 7</td><td>Discrete Random Variable Examples</td></tr>
+                                <tr><td>Week 8</td><td>More Examples on Discrete Random Variables</td></tr>
+                                <tr><td>Week 9</td><td>Continuous Random Variables, PDF, Expectation, Variance</td></tr>
+                                <tr><td>Week 10</td><td>Examples of Continuous Random Variables</td></tr>
+                                <tr><td>Week 11</td><td>Jointly Distributed Random Variables, Independence, Sums</td></tr>
+                                <tr><td>Week 12</td><td><strong>Second Midterm</strong> &mdash; Conditional Distributions</td></tr>
+                                <tr><td>Week 13</td><td>Covariance, Variance of Sums, Correlation</td></tr>
+                                <tr><td>Week 14</td><td>Properties of Expectation, Conditional Expectation</td></tr>
+                                <tr><td>Week 15</td><td>Inequalities and Limit Theorems</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="course-section">
+                        <h2>Textbook</h2>
+                        <ul>
+                            <li>S. Ross, <em>A First Course in Probability</em>, 9th edition, Pearson, 2015.</li>
+                        </ul>
+                    </div>
+
+                    <div class="course-section">
+                        <h2>Assignments &amp; Policies</h2>
+                        <ul>
+                            <li>Homework is due by 4:30 PM on the indicated date; submitted via Blackboard as a single PDF.</li>
+                            <li>Late submissions are not accepted under any circumstances.</li>
+                            <li>Discussion with peers is encouraged; each student must submit their own work.</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <!-- Sidebar -->
+                <aside class="course-sidebar">
+
+                    <div class="info-card">
+                        <h3>Course Info</h3>
+                        <div class="info-row">
+                            <div class="info-item">
+                                <span class="info-label">Units</span>
+                                <span class="info-value">3</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Location</span>
+                                <span class="info-value">VHE 217</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Time</span>
+                                <span class="info-value">Tuesday / Thursday, 8:00&ndash;9:20 AM</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Instructor</h3>
+                        <div class="info-row">
+                            <div class="info-item">
+                                <span class="info-label">Name</span>
+                                <span class="info-value"><a href="index.html">Meisam Razaviyayn</a></span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Email</span>
+                                <span class="info-value"><a href="mailto:razaviya@usc.edu">razaviya@usc.edu</a></span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Office Hours</span>
+                                <span class="info-value">Thursdays 1&ndash;2 PM, OHE 310G</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Teaching Assistant</h3>
+                        <div class="info-row">
+                            <div class="info-item">
+                                <span class="info-label">Name</span>
+                                <span class="info-value">Sina Baharlouei</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Email</span>
+                                <span class="info-value"><a href="mailto:baharlou@usc.edu">baharlou@usc.edu</a></span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Office Hours</span>
+                                <span class="info-value">Mondays 11 AM&ndash;12 PM, GER 242B</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Grading</h3>
+                        <table class="grading-table">
+                            <tr><td>First Midterm</td><td>20%</td></tr>
+                            <tr><td>Second Midterm</td><td>20%</td></tr>
+                            <tr><td>Final Exam</td><td>30%</td></tr>
+                            <tr><td>Homework</td><td>20%</td></tr>
+                            <tr><td>Participation</td><td>10%</td></tr>
+                        </table>
+                    </div>
+
+
+                </aside>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div class="footer-info">
+                <h3>Meisam Razaviyayn</h3>
+                <p>Associate Professor<br>University of Southern California</p>
+                <p class="footer-email"><a href="mailto:razaviya@usc.edu">razaviya@usc.edu</a></p>
+            </div>
+            <div class="footer-links">
+                <h4>Links</h4>
+                <ul>
+                    <li><a href="https://scholar.google.com/citations?user=-qhGYywAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a></li>
+                    <li><a href="https://sites.usc.edu/razaviyayn/files/2024/12/CV-6.pdf" target="_blank" rel="noopener">Curriculum Vitae</a></li>
+                    <li><a href="index.html#teaching">All Courses</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Affiliations</h4>
+                <ul>
+                    <li><a href="https://viterbi.usc.edu/" target="_blank" rel="noopener">USC Viterbi School of Engineering</a></li>
+                    <li><a href="https://ise.usc.edu/" target="_blank" rel="noopener">Daniel J. Epstein Dept. of ISE</a></li>
+                    <li><a href="https://realai.usc.edu/" target="_blank" rel="noopener">REAL@USC</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2025 Meisam Razaviyayn. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
